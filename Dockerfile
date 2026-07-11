@@ -14,7 +14,7 @@ COPY scripts/ scripts/
 COPY alembic/ alembic/
 
 RUN uv sync --all-extras --no-dev
-
+Run uv pip install -e
 RUN chmod +x scripts/entrypoint.sh
 
 CMD ["./scripts/entrypoint.sh"]
