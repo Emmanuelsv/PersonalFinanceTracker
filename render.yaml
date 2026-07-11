@@ -5,7 +5,7 @@ services:
     plan: free
     envVars:
       - key: DATABASE_URL
-        fromDatabase: PostgreSQL
+        fromDatabase: 
           name: finanzas-db
           property: connectionString
       - key: TELEGRAM_BOT_TOKEN
