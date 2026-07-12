@@ -1,5 +1,5 @@
 services:
-  - type: worker
+  - type: web
     name: finanzas-bot
     runtime: docker
     plan: free
