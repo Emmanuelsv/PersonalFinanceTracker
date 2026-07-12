@@ -1,6 +1,7 @@
 from sqlmodel import Session, select
 
 from finanzas.domain.entities.categoria import Categoria, TipoAsociado
+from finanzas.infrastructure.db import models  # noqa: F401
 from finanzas.infrastructure.db.engine import crear_tablas, engine
 
 CATEGORIAS: list[dict] = [
@@ -30,7 +31,6 @@ CATEGORIAS: list[dict] = [
     {"nombre": "Carro", "tipo_asociado": TipoAsociado.SALIDA},
     {"nombre": "Casa", "tipo_asociado": TipoAsociado.SALIDA},
     {"nombre": "Seguridad social", "tipo_asociado": TipoAsociado.SALIDA},
-    
 ]
 
 
