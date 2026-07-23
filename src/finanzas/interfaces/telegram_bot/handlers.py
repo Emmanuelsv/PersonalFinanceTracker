@@ -21,6 +21,7 @@ from finanzas.application.use_cases.obtener_balance import (
 from finanzas.application.use_cases.registrar_movimiento import (
     RegistrarMovimiento,
 )
+from finanzas.infrastructure.db import models  # noqa: F401
 from finanzas.domain.entities.movimiento import TipoMovimiento
 from finanzas.infrastructure.db.engine import engine
 from finanzas.infrastructure.repositories.repositorio_categorias_sqlmodel import (
