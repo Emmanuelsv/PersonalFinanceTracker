@@ -2,7 +2,7 @@ from sqlmodel import Session, SQLModel, create_engine
 
 from finanzas.config.settings import settings
 
-_connect_args: dict = {}
+_connect_args: dict[str, bool] = {}
 if settings.database_url.startswith("sqlite"):
     _connect_args["check_same_thread"] = False
 

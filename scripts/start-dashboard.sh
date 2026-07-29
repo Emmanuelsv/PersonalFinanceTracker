@@ -7,5 +7,4 @@ exec "$PROJECT_ROOT/.venv/bin/python" -m streamlit run \
     "$PROJECT_ROOT/src/finanzas/interfaces/dashboard/app.py" \
     --server.port "$PORT" \
     --server.address 0.0.0.0 \
-    --server.headless true \
-    --server.enableCORS false
+    --server.headless true
