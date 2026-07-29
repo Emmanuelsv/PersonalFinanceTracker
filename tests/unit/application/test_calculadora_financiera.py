@@ -1,6 +1,6 @@
 from datetime import date
 from decimal import Decimal
-from uuid import uuid4
+from uuid import UUID, uuid4
 
 from finanzas.application.services.calculadora_financiera import (
     CalculadoraFinanciera,
@@ -24,7 +24,7 @@ class TestCalculadoraFinanciera:
         tipo: TipoMovimiento,
         valor: str,
         dia: int,
-        categoria_id: uuid4 | None = None,
+        categoria_id: UUID | None = None,
     ) -> Movimiento:
         return Movimiento(
             tipo=tipo,
