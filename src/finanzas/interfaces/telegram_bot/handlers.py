@@ -127,11 +127,12 @@ async def ingresar_descripcion(update: Update, context) -> int:
         RepositorioMovimientosSQLModel,
     )
 
-    text = update.message.text.strip()
-    descripcion = None if text == "/skip" else text
-
-    session = Session(engine)
+    session = None
     try:
+        text = update.message.text.strip()
+        descripcion = None if text == "/skip" else text
+
+        session = Session(engine)
         repo_mov = RepositorioMovimientosSQLModel(session)
         repo_cat = RepositorioCategoriasSQLModel(session)
         use_case = RegistrarMovimiento(repo_mov, repo_cat)
@@ -151,7 +152,8 @@ async def ingresar_descripcion(update: Update, context) -> int:
     except Exception as e:
         await update.message.reply_text(f"Error: {e}")
     finally:
-        session.close()
+        if session:
+            session.close()
     return -1
 
 
@@ -163,8 +165,9 @@ async def skip_descripcion(update: Update, context) -> int:
 async def cmd_balance(update: Update, _context) -> None:
     from datetime import date
 
-    session = Session(engine)
+    session = None
     try:
+        session = Session(engine)
         repo_mov = RepositorioMovimientosSQLModel(session)
         use_case = ObtenerBalanceMensual(repo_mov)
         today = date.today()
@@ -184,14 +187,16 @@ async def cmd_balance(update: Update, _context) -> None:
     except Exception as e:
         await update.message.reply_text(f"Error: {e}")
     finally:
-        session.close()
+        if session:
+            session.close()
 
 
 async def cmd_listar(update: Update, _context) -> None:
     from datetime import date
 
-    session = Session(engine)
+    session = None
     try:
+        session = Session(engine)
         repo_mov = RepositorioMovimientosSQLModel(session)
         use_case = ListarMovimientos(repo_mov)
         today = date.today()
@@ -212,7 +217,8 @@ async def cmd_listar(update: Update, _context) -> None:
     except Exception as e:
         await update.message.reply_text(f"Error: {e}")
     finally:
-        session.close()
+        if session:
+            session.close()
 
 
 def obtener_handlers() -> list:
@@ -231,6 +237,7 @@ def obtener_handlers() -> list:
             ],
         },
         fallbacks=[],
+        per_message=False,
     )
     return [
         conv_handler,
