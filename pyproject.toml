@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=64.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "finanzas-personales"
 version = "0.1.0"
@@ -34,6 +38,9 @@ dev = [
     "mypy>=1.11.0",
     "factory-boy>=3.3.0",
 ]
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.ruff]
 line-length = 100

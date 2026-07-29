@@ -21,7 +21,7 @@ services:
     name: finanzas-dashboard
     runtime: python
     plan: free
-    buildCommand: pip install uv && uv sync --all-extras --no-dev
+    buildCommand: pip install uv && uv sync --all-extras --no-dev && uv pip install -e .
     startCommand: ./scripts/start-dashboard.sh
     healthCheckPath: /_stcore/health
     envVars:
@@ -31,6 +31,8 @@ services:
           property: connectionString
       - key: LOG_LEVEL
         value: INFO
+      - key: PYTHONPATH
+        value: src
 
 databases:
   - name: finanzas-db
