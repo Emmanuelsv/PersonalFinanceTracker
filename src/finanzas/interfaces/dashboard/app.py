@@ -10,6 +10,7 @@ from sqlmodel import Session, select
 from finanzas.application.services.calculadora_financiera import (
     CalculadoraFinanciera,
 )
+from finanzas.config.settings import settings
 from finanzas.domain.entities.categoria import Categoria
 from finanzas.domain.entities.movimiento import (
     Movimiento,
@@ -19,6 +20,27 @@ from finanzas.domain.value_objects.periodo import Periodo
 from finanzas.infrastructure.db.engine import engine
 
 st.set_page_config(page_title="Personal Finance Dashboard", layout="wide")
+
+
+def check_password() -> bool:
+    if "authenticated" in st.session_state and st.session_state.authenticated:
+        return True
+
+    st.title("Accesso restringido")
+    with st.form("password_form"):
+        password = st.text_input("Contraseña", type="password")
+        if st.form_submit_button("Ingresar"):
+            if password == settings.dashboard_password:
+                st.session_state.authenticated = True
+                st.rerun()
+            else:
+                st.error("Contraseña incorrecta")
+    return False
+
+
+if not check_password():
+    st.stop()
+
 st.title("Personal Finance Dashboard")
 
 calculadora = CalculadoraFinanciera()

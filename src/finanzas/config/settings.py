@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     email_from: str = ""
     email_to: str = ""
     secret_key: str = "change-this-to-a-random-secret-key"
+    dashboard_password: str = ""
     log_level: str = "INFO"
 
     @property
