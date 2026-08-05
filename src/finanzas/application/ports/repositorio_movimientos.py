@@ -21,6 +21,9 @@ class RepositorioMovimientos(ABC):
     def listar_todos(self) -> list[Movimiento]: ...
 
     @abstractmethod
+    def obtener_ultimo(self) -> Movimiento | None: ...
+
+    @abstractmethod
     def buscar_por_hash(self, hash_conciliacion: str) -> Movimiento | None: ...
 
     @abstractmethod

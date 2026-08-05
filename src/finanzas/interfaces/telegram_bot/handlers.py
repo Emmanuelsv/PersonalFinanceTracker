@@ -12,6 +12,9 @@ from telegram.ext import (
     filters,
 )
 
+from finanzas.application.use_cases.eliminar_ultimo_movimiento import (
+    EliminarUltimoMovimiento,
+)
 from finanzas.application.use_cases.listar_movimientos import (
     ListarMovimientos,
 )
@@ -221,6 +224,28 @@ async def cmd_listar(update: Update, _context) -> None:
             session.close()
 
 
+async def cmd_eliminar_ultimo(update: Update, _context) -> None:
+    session = None
+    try:
+        session = Session(engine)
+        repo_mov = RepositorioMovimientosSQLModel(session)
+        use_case = EliminarUltimoMovimiento(repo_mov)
+        eliminado = use_case.ejecutar()
+        await update.message.reply_text(
+            f"*Movimiento eliminado:*\n"
+            f"Type: {eliminado.tipo.value}\n"
+            f"Amount: {eliminado.valor:.2f}\n"
+            f"Date: {eliminado.fecha}\n"
+            f"Description: {eliminado.descripcion or '(none)'}",
+            parse_mode="Markdown",
+        )
+    except Exception as e:
+        await update.message.reply_text(f"Error: {e}")
+    finally:
+        if session:
+            session.close()
+
+
 def obtener_handlers() -> list:
 
     conv_handler = ConversationHandler(
@@ -243,4 +268,5 @@ def obtener_handlers() -> list:
         conv_handler,
         CommandHandler("balance", cmd_balance),
         CommandHandler("listar", cmd_listar),
+        CommandHandler("eliminar_ultimo", cmd_eliminar_ultimo),
     ]

@@ -33,6 +33,7 @@ CATEGORIAS: list[dict] = [
     {"nombre": "Carro", "tipo_asociado": TipoAsociado.SALIDA},
     {"nombre": "Casa", "tipo_asociado": TipoAsociado.SALIDA},
     {"nombre": "Seguridad social", "tipo_asociado": TipoAsociado.SALIDA},
+    {"nombre": "Manuela", "tipo_asociado": TipoAsociado.SALIDA},
 ]
 
 

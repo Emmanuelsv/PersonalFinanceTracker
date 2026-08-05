@@ -1,7 +1,7 @@
 from datetime import UTC, date, datetime
 from uuid import UUID
 
-from sqlmodel import Session, asc, select
+from sqlmodel import Session, asc, desc, select
 
 from finanzas.application.ports.repositorio_movimientos import (
     RepositorioMovimientos,
@@ -40,6 +40,14 @@ class RepositorioMovimientosSQLModel(RepositorioMovimientos):
     def listar_todos(self) -> list[Movimiento]:
         stmt = select(Movimiento).order_by(asc(Movimiento.fecha))
         return list(self.session.exec(stmt).all())
+
+    def obtener_ultimo(self) -> Movimiento | None:
+        stmt = (
+            select(Movimiento)
+            .order_by(desc(Movimiento.creado_en), desc(Movimiento.id))
+            .limit(1)
+        )
+        return self.session.exec(stmt).first()
 
     def buscar_por_hash(self, hash_conciliacion: str) -> Movimiento | None:
         stmt = select(Movimiento).where(
