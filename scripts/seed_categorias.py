@@ -13,7 +13,7 @@ CATEGORIAS: list[dict] = [
     {"nombre": "Airbnb", "tipo_asociado": TipoAsociado.INGRESO},
     {"nombre": "Servicion de programación", "tipo_asociado": TipoAsociado.INGRESO},
     {"nombre": "Ventas", "tipo_asociado": TipoAsociado.INGRESO},
-
+    {"nombre": "Moto", "tipo_asociado": TipoAsociado.SALIDA},
     {"nombre": "Otros ingresos", "tipo_asociado": TipoAsociado.INGRESO},
     {"nombre": "Otras salidas", "tipo_asociado": TipoAsociado.SALIDA},
     {"nombre": "Acciones", "tipo_asociado": TipoAsociado.INGRESO},
